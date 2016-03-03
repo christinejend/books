@@ -9,8 +9,6 @@ $pdoOptions = [
 
 
 
-
-
 try{//attraper là, encadrer dans ne structure try
 
 	$dsn = sprintf('%s:host=%s;dbname=%s', $dbConfig['driver'], $dbConfig['host'],$dbConfig['dbname']);
@@ -22,19 +20,20 @@ try{//attraper là, encadrer dans ne structure try
 
 }catch(PDOException $e){
 
-	echo $e ->getMessage();
+	die( $e ->getMessage());
 }//Sorte de if else - try
 
 
 
 
+// index, show
 
+$a = isset($_REQUEST['a'])? $_REQUEST['a'] :'index'; // Vérifie si il y a 'a' ou 'e' dans l'url
 
+$e = isset($_REQUEST['e'])? $_REQUEST['e']:'books'; //Ecrasera le else de try 
 
+include('controllers/' . $e . 'controller.php');
 
+	$datas = call_user_func($a);
 
-
-
-include ('book.php');
-
-include ('view.php');
+include ('views/view.php');
